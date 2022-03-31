@@ -127,7 +127,7 @@ function render_template($file_path, $vars = array()){
 function add_http($url){
 
 	if(!preg_match('#^https?://#i', $url)){
-		$url = 'http://' . $url;
+		$url = 'https://' . $url;
 	}
 	
 	return $url;
