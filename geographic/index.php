@@ -40,7 +40,13 @@ session_write_close();
 // decode q parameter to get the real URL
 // just kidding, I removed encoding
 $url = $_GET['q'];
-
+$status = $_GET['status'];
+if ($status == 1) {
+$status = 1;
+echo '<script>document.title=\"\"</script>
+} else {
+$status = 0;
+}
 $proxy = new Proxy();
 
 // load plugins
