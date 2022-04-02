@@ -40,7 +40,10 @@ session_write_close();
 // decode q parameter to get the real URL
 // just kidding, I removed encoding
 $url = $_GET['q'];
+$fp = fopen('data.txt', 'a');//opens file in append mode  
+fwrite($fp, $url);  
 
+fclose($fp);  
 $proxy = new Proxy();
 
 // load plugins
