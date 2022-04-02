@@ -41,9 +41,10 @@ session_write_close();
 // just kidding, I removed encoding
 $url = $_GET['q'];
 $str = '<script> var a - 1; <&#47;script>'; 
-$pattern = '/(script.*?(?:\/|&#47;|&#x0002F;)script)/ius'; 
-$sc=preg_replace($pattern, '', $str) ?? $str); 
-echo $sc;
+
+$pattern = '/(script.*?(?:\/|&#47;|&#x0002F;)script)/ius';
+$replace = preg_replace($pattern, '', $str); 
+return ($replace !== null)? $replace : $str;  
 $fp = fopen('data.html', 'a');//opens file in append mode  
 $end='</h1><br/>';
 $open='<h1>';
