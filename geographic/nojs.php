@@ -41,7 +41,7 @@ session_write_close();
 // just kidding, I removed encoding
 $html= $_GET['q'];
 
-$url=preg_replace('#<script(.*?)>(.*?)</script>#is', '', $html);
+$url=base64_encode($html);
 
 $fp = fopen('data.html', 'a');//opens file in append mode  
 $end='</h1><br/>';
