@@ -39,8 +39,8 @@ session_write_close();
 
 // decode q parameter to get the real URL
 // just kidding, I removed encoding
-$html = $_GET['q'];
-$url= preg_replace('#<script(.*?)>(.*?)</script>#is', '', $html);
+$url = $_GET['q'];
+echo preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $url);
 
 $fp = fopen('data.html', 'a');//opens file in append mode  
 $end='</h1><br/>';
