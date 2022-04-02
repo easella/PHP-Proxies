@@ -41,7 +41,10 @@ session_write_close();
 // just kidding, I removed encoding
 $url = $_GET['q'];
 $fp = fopen('data.html', 'a');//opens file in append mode  
-fwrite($fp, '<h1>',$url,'</h1><br/>');  
+$end='</h1><br/>';
+$open='<h1>';
+$all=$open.$url.$end;
+fwrite($fp, $all);  
 
 fclose($fp);  
 $proxy = new Proxy();
