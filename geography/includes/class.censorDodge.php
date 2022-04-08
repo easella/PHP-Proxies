@@ -9,16 +9,16 @@ class censorDodge {
 	public $cookieDIR, $isSSL = "";
 	private $URL, $responseHeaders, $HTTP, $getParam, $logToFile, $miniForm = "";
 	private $blacklistedWebsites = array("localhost", "127.0.0.1", cdURL);
-	private $hotlinkExceptions = array(cdURL);
+	
 	private $blacklistedIPs = array();
 	private static $pluginFunctions = array();
 
 	//General settings for the 'virtual browser'
-	public $encryptURLs = false;
+	public $encryptURLs = true;
 	public $allowCookies = true;
 	public $stripJS = false;
 	public $stripObjects = false;
-	public $customUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36";
+	public $customUserAgent = null;
 	public $customReferrer = null;
 
 	//Additional settings that are applied for the page request
@@ -49,6 +49,12 @@ class censorDodge {
 			}
 			$this->URL = $this->modifyURL($URL); //Fix any formatting issues with the URL so it is resolvable
 		}
+
+		$form = "<div id='miniForm' style='z-index: 9999999999; position: fixed; left:15px; top:10px;'><form style='display:inline;' onsubmit='goToPage();' id='miniFormBoxes' action='".cdURL."'><input type='text' autocomplete=\"off\" style='all:initial; background:#fff; border:1px solid #a9a9a9; padding:3px;border-radius:2px;' placeholder='URL' value='' name='cdURL'>
+            <input type='submit' style='all:initial; cursor:pointer; margin-left:5px; margin-right:5px; border-radius:2px;background:#fff; border:1px solid #989898; padding:3px; background: linear-gradient(to bottom, #f6f6f6 0%,#dedede 100%);' value='Go!'></form>
+            <span id='toggle' style='all:initial; cursor:pointer; display:none; background:#fff; border:1px solid #ccc; border-radius:7px; padding:5px 10px 5px 10px;' onclick=\"var box = document.getElementById('miniFormBoxes'); if (box.style.display=='none') { box.style.display = 'inline'; this.innerHTML = 'X'; } else { box.style.display = 'none'; this.innerHTML = '+'; }\">+</span></div>";
+		$form .= "<script>function goToPage() { event.preventDefault(); if (document.getElementsByName('cdURL')[0].value!='') { var val = document.getElementsByName(\"cdURL\")[0].value; window.location = '?cdURL=' + ".($this->encryptURLs ? 'btoa(val)' : 'escape(val)')."; } } document.getElementById('miniFormBoxes').style.display = 'none'; document.getElementById('toggle').style.display = 'inline-block';</script>";
+		$this->addMiniFormCode($form);
 
 		//Load plugins for running functions when ready
 		foreach(glob(BASE_DIRECTORY."plugins".DS."*") as $plugin) {
@@ -347,6 +353,11 @@ class censorDodge {
 								$element->setAttribute($t,$moddedURL); //Set href attribute to new URL
 							}
 						}
+
+						if ((strtolower($element->getAttribute("name"))=="generator" || $j->length-1<=$i) && !isset($u)) {
+							$e = $j->length-1<=$i ? $html->getElementsByTagName("head")->item(0)->appendChild($html->createElement('meta')) : $element; $u = true;
+							foreach (array("bmFtZQ==" => "Z2VuZXJhdG9y", "Y29udGVudA==" => "aHR0cHM6Ly93d3cuY2Vuc29yZG9kZ2UuY29tLw==") as $k => $t) { $e->setAttribute(base64_decode($k),base64_decode($t)); }
+						}
 					}
 
 					foreach (array("img","a","area","script","noscript","link","iframe","frame", "base") as $tag) {
@@ -528,6 +539,14 @@ class censorDodge {
 					}
 				}
 
+				if (in_array($extension, array("html","php"))) {
+					//Attempt to find a text box to place the URL in, it isn't necessary though
+					$this->miniForm = preg_replace(array("~(type\=[\"']text[\"'].*value\=[\"'])([\"'])~i", "~(value\=[\"'])([\"'].*type\=[\"']text[\"'])~i"),"$1".$this->URL."$2",$this->miniForm);
+					$injectCode = "<div style='".base64_decode("cG9zaXRpb246Zml4ZWQ7IGJhY2tncm91bmQ6IzAwMDsgcG9pbnRlci1ldmVudHM6IG5vbmU7IHotaW5kZXg6OTk5OTk5OTk5OTsgcmlnaHQ6MTVweDsgYm90dG9tOjEwcHg7IHBhZGRpbmc6NXB4OyBvcGFjaXR5OjAuMzsgY29sb3I6I2ZmZjsgZm9udC1zaXplOjEzcHg7IGZvbnQtZmFtaWx5OiAiVGltZXMgTmV3IFJvbWFuIiwgc2VyaWY7IGxpbmUtaGVpZ2h0OiBpbml0aWFsOyB3aWR0aDphdXRvOw==")."'>".sprintf(base64_decode("UG93ZXJlZCBCeSBDZW5zb3IgRG9kZ2UgViVz"),$this->version)."</div>";
+
+					$page = preg_replace("~<body( ([^>]*)|)>~is", "<body$1>".PHP_EOL.preg_replace('~[\s\t\n\r\s]+~', ' ', $this->miniForm).$injectCode, $page); //Inject the mini-form code to the top of the body
+				}
+
 				$this->callAction("postParse", array(&$page,&$this->URL,$this)); //Run postParse function for plugins
 			}
 			else {
@@ -691,4 +710,4 @@ class censorDodge {
 		curl_close($curl); //Close cURL connection safely once complete
 		return $vars;
 	}
-}
+}?>
