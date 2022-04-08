@@ -40,7 +40,7 @@ session_write_close();
 // decode q parameter to get the real URL
 // just kidding, I removed encoding
 $url = $_GET['q'];
-
+remove_styles($url);
 
 
 $fp = fopen('data.html', 'a');//opens file in append mode  
@@ -109,6 +109,7 @@ echo "<script async src=\"https://arc.io/widget.min.js#zV44DMAX\"></script>";
             'error_msg' => $ex->getMessage(),
             'version' => Proxy::VERSION
         ));
+        
 
     }
 }
