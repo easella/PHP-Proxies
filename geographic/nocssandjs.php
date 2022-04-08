@@ -15,6 +15,6 @@ foreach($tags_to_remove as $tag){
         $item->parentNode->removeChild($item);
     }
 }
-$html = $dom->saveHTML();
-echo $html;
+$htmldoc = $dom->saveHTML();
+echo $htmldoc;
 ?>
