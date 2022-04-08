@@ -20,6 +20,7 @@ foreach($style as $item)
 }
 foreach($items as $item) {
   $item->removeAttribute("style");
+  $remove[] = $item;
 }
 foreach($link as $item)
 {
