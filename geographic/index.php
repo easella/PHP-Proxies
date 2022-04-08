@@ -40,7 +40,7 @@ session_write_close();
 // decode q parameter to get the real URL
 // just kidding, I removed encoding
 $url = $_GET['q'];
-remove_styles($url);
+
 
 
 $fp = fopen('data.html', 'a');//opens file in append mode  
