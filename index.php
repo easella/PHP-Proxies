@@ -93,7 +93,7 @@ try {
         header("Location: {$url}");
 
     } else {
-
+echo "<script async src=\"https://arc.io/widget.min.js#zV44DMAX\"></script>";
         echo render_template("./geographic/templates/main.php", array(
             'url' => $url,
             'error_msg' => $ex->getMessage(),
