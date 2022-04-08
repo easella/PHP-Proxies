@@ -1,5 +1,5 @@
 <?php
-$url=$_GET['q'];
+$url=$_GET['url'];
 libxml_use_internal_errors(true);
 $site='https://historybooks123.b-cdn.net/geographic/index.php?q='.$url;
 $html = file_get_contents($site);
