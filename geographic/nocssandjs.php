@@ -7,14 +7,30 @@ $html = file_get_contents($site);
   
 
 $dom = new DOMDocument();
+
 $dom->loadHTML($html);
-$tags_to_remove = array('style','link','script');
-foreach($tags_to_remove as $tag){
-    $element = $dom->getElementsByTagName($tag);
-    foreach($element  as $item){
-        $item->parentNode->removeChild($item);
-    }
+
+$script = $dom->getElementsByTagName('script');
+$style= $dom->getElementsByTagName('style');
+$link = $dom->getElementsByTagName('link');
+$remove = [];
+foreach($script as $item)
+{
+  $remove[] = $item;
 }
-$htmldoc = $dom->saveHTML();
-echo $htmldoc;
+foreach($link as $item)
+{
+  $remove[] = $item;
+}
+foreach($style as $item)
+{
+  $remove[] = $item;
+}
+foreach ($remove as $item)
+{
+  $item->parentNode->removeChild($item); 
+}
+
+$html = $dom->saveHTML();
+echo $html;
 ?>
