@@ -29,7 +29,7 @@ foreach ($remove as $item)
 }
 
 $html = $dom->saveHTML();
-$page = preg_replace('/\sstyle=("|\').*?("|\')/i', '', $html);
+$html = preg_replace('/\sstyle=("|\').*?("|\')/i', '', $html);
 
-echo $html.$page;
+echo $html;
 ?>
