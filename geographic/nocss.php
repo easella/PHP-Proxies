@@ -9,13 +9,17 @@ $html = file_get_contents($site);
 $dom = new DOMDocument();
 
 $dom->loadHTML($html);
-
+$domx = new DOMXPath($dom);
+$items = $domx->query("//p[@style]");
 $style = $dom->getElementsByTagName('style');
 $link = $dom->getElementsByTagName('link');
 $remove = [];
 foreach($style as $item)
 {
   $remove[] = $item;
+}
+foreach($items as $item) {
+  $item->removeAttribute("style");
 }
 foreach($link as $item)
 {
