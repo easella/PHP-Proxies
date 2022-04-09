@@ -70,7 +70,7 @@ class YoutubePlugin extends AbstractPlugin
         }
 
         // causes too many problems...
-        $output = Html::remove_scripts($output);
+    
 
         $response->setContent($output);
     }
