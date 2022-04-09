@@ -10,18 +10,15 @@ $dom = new DOMDocument();
 
 $dom->loadHTML($html);
 
-$style = $dom->getElementsByTagName('style');
-$link = $dom->getElementsByTagName('link');
+$style = $dom->getElementsByTagName('title');
+
 $remove = [];
 foreach($style as $item)
 {
   $remove[] = $item;
 }
 
-foreach($link as $item)
-{
-  $remove[] = $item;
-}
+
 
 foreach ($remove as $item)
 {
