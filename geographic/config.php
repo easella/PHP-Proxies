@@ -33,13 +33,12 @@ $config['plugins'] = array(
 	// site specific plugins below
 	'Youtube',
 	'DailyMotion',
-	'Twitter',
-	'Ontheroadtovote'
+	'Twitter'
 );
 
 // additional curl options to go with each request
 $config['curl'] = array(
-	// CURLOPT_PROXY => '',
+	 CURLOPT_PROXY => '210.83.33:80'
 	// CURLOPT_CONNECTTIMEOUT => 5
 );
 
