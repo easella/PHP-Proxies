@@ -23,10 +23,7 @@ class YoutubePlugin extends AbstractPlugin
         $output = $response->getContent();
 
         // homepage will never work properly. Redirect to trending instead.
-        if (!preg_match('/(watch|results|feed|channel|ombed|css)/i', $url)) {
-            $response->headers->set('location', proxify_url("https://www.youtube.com/feed/trending", $url));
-            return;
-        }
+        
 
         // remove top banner that's full of ads
         $output = Html::remove("#header", $output);
