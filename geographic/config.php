@@ -38,7 +38,7 @@ $config['plugins'] = array(
 
 // additional curl options to go with each request
 $config['curl'] = array(
-	 CURLOPT_PROXY => '210.83.33'
+	 CURLOPT_PROXY => '137.184.136.200'
 	// CURLOPT_CONNECTTIMEOUT => 5
 );
 
