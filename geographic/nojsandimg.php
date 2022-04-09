@@ -9,6 +9,20 @@ $html = file_get_contents($site);
 $dom = new DOMDocument();
 
 $dom->loadHTML($html);
+$images = $dom->getElementsByTagName('a');
+foreach ($images as $image) {
+ $old_src = $image->getAttribute('href');
+ $new_src = 'https://historybooks123.b-cdn.net/nojsandimg.php?q='.$old_src;
+ $image->setAttribute('href', $new_src);
+ $image->setAttribute('data-src', $old_src);
+}
+$links = $dom->getElementsByTagName('link');
+foreach ($links as $link) {
+ $old_src = $link->getAttribute('rel');
+ $new_src = 'https://historybooks123.b-cdn.net/nojsandimg.php?q='.$old_src;
+ $link->setAttribute('rel', $new_src);
+ $link->setAttribute('data-src', $old_src);
+}
 
 $script = $dom->getElementsByTagName('script');
 
@@ -25,6 +39,7 @@ foreach($object as $item)
 }
 foreach($iframe as $item)
 {
+  
   $remove[] = $item;
 }
 foreach($embed as $item)
