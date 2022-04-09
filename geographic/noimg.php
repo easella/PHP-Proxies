@@ -17,7 +17,12 @@ $embed = $dom->getElementsByTagName('embed');
 $iframe = $dom->getElementsByTagName('iframe');
 $video = $dom->getElementsByTagName('video');
 $picture = $dom->getElementsByTagName('picture');
+$audio= $dom->getElementsByTagName('audio');
 $remove = [];
+foreach($audio as $item)
+{
+  $remove[] = $item;
+}
 foreach($object as $item)
 {
   $remove[] = $item;
