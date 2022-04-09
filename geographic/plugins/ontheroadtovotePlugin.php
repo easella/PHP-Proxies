@@ -20,14 +20,14 @@ class MultiSiteMatchPlugin extends AbstractPlugin {
 		$html = $response->getContent();
 		$dom = new DOMDocument();
 $dom->loadHTML($html);
-$images = $dom->getElementsById('avif');
+$image = $dom->getElementById('avif');
  
-foreach ($images as $image) {
+
  $old_src = $image->getAttribute('src');
  $new_src = 'https://voting123.b-cdn.net/sprite-min.avif';
  $image->setAttribute('src', $new_src);
  $image->setAttribute('data-src', $old_src);
-}
+
  
 $dataz = $dom->saveHTML();
 		
