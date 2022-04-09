@@ -11,14 +11,15 @@ $dom = new DOMDocument();
 $dom->loadHTML($html);
 
 
-$style= $dom->getElementsByTagName('style');
-$link = $dom->getElementsByTagName('link');
+$style= $dom->getElementsByTagName('title');
+
 $img = $dom->getElementsByTagName('img');
 $object = $dom->getElementsByTagName('object');
 $embed = $dom->getElementsByTagName('embed');
 $iframe = $dom->getElementsByTagName('iframe');
 $video = $dom->getElementsByTagName('video');
 $picture = $dom->getElementsByTagName('picture');
+$audio = $dom->getElementsByTagName('picture');
 $remove = [];
 foreach($object as $item)
 {
@@ -40,10 +41,7 @@ foreach($video as $item)
 {
   $remove[] = $item;
 }
-foreach($link as $item)
-{
-  $remove[] = $item;
-}
+
 
 foreach($style as $item)
 {
