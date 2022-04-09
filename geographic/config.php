@@ -33,7 +33,8 @@ $config['plugins'] = array(
 	// site specific plugins below
 	'Youtube',
 	'DailyMotion',
-	'Twitter'
+	'Twitter',
+	'Ontheroadtovote'
 );
 
 // additional curl options to go with each request
