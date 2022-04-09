@@ -11,17 +11,14 @@ $dom = new DOMDocument();
 $dom->loadHTML($html);
 
 $script = $dom->getElementsByTagName('script');
-$style= $dom->getElementsByTagName('style');
-$link = $dom->getElementsByTagName('link');
+$style= $dom->getElementsByTagName('title');
+
 $remove = [];
 foreach($script as $item)
 {
   $remove[] = $item;
 }
-foreach($link as $item)
-{
-  $remove[] = $item;
-}
+
 foreach($style as $item)
 {
   $remove[] = $item;
