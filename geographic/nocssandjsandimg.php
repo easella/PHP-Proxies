@@ -11,19 +11,25 @@ $dom = new DOMDocument();
 $dom->loadHTML($html);
 
 $script = $dom->getElementsByTagName('script');
-$style= $dom->getElementsByTagName('style');
-$link = $dom->getElementsByTagName('link');
+$style= $dom->getElementsByTagName('title');
+
 $img = $dom->getElementsByTagName('img');
 $object = $dom->getElementsByTagName('object');
 $embed = $dom->getElementsByTagName('embed');
 $iframe = $dom->getElementsByTagName('iframe');
 $video = $dom->getElementsByTagName('video');
 $picture = $dom->getElementsByTagName('picture');
+$audio= $dom->getElementsByTagName('audio');
 $remove = [];
+foreach($audio as $item)
+{
+  $remove[] = $item;
+}
 foreach($object as $item)
 {
   $remove[] = $item;
 }
+
 foreach($iframe as $item)
 {
   $remove[] = $item;
