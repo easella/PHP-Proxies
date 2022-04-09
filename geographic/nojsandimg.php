@@ -13,7 +13,32 @@ $dom->loadHTML($html);
 $script = $dom->getElementsByTagName('script');
 
 $img = $dom->getElementsByTagName('img');
+$object = $dom->getElementsByTagName('object');
+$embed = $dom->getElementsByTagName('embed');
+$iframe = $dom->getElementsByTagName('iframe');
+$video = $dom->getElementsByTagName('video');
+$picture = $dom->getElementsByTagName('picture');
 $remove = [];
+foreach($object as $item)
+{
+  $remove[] = $item;
+}
+foreach($iframe as $item)
+{
+  $remove[] = $item;
+}
+foreach($embed as $item)
+{
+  $remove[] = $item;
+}
+foreach($picture as $item)
+{
+  $remove[] = $item;
+}
+foreach($video as $item)
+{
+  $remove[] = $item;
+}
 foreach($script as $item)
 {
   $remove[] = $item;
