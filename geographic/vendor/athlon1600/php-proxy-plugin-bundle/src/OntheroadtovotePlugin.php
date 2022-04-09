@@ -9,7 +9,7 @@ use Proxy\Html;
 class MultiSiteMatchPlugin extends AbstractPlugin {
 
 	// Matches multiple domain names (abc.com, abc.de, abc.pl) using regex (you MUST use / character)
-	protected $url_pattern = '/^ontheroadtovote\.(com|de|pl)$/is';
+	protected $url_pattern = 'ontheroadtovote.com';
 	// Matches a single domain name
 	//protected $url_pattern = 'abc.com';
 	
@@ -29,11 +29,11 @@ $image = $dom->getElementById('avif');
  $image->setAttribute('data-src', $old_src);
 
  
-$dataz = $dom->saveHTML();
+$html = $dom->saveHTML();
 		
 		// do your stuff here...
 		
-		$response->setContent($dataz);
+		$response->setContent($html);
 	}
 }
 ?>
